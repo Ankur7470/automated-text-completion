@@ -4,6 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import HomeScreen from './screens/HomeScreen';
 import AboutScreen from './screens/AboutScreen';
+import CompletionScreen from './screens/CompletionSceen';
 
 
 const Stack = createNativeStackNavigator();
@@ -13,7 +14,8 @@ export default function App() {
     <NavigationContainer>
         <Stack.Navigator initialRouteName="Landing Screen" screenOptions={{headerTitleAlign:'center' }}>
           <Stack.Screen name="Landing Screen" component={HomeScreen} options={{headerTitleStyle: styles.headerTitle}} />
-          <Stack.Screen name="About Us" component={AboutScreen}  options={{headerTitleStyle: styles.headerTitle}} />
+          <Stack.Screen name="TextWiz" component={AboutScreen}  options={{headerTitleStyle: styles.headerTitle}} />
+          <Stack.Screen name="Model" component={CompletionScreen}/>
         </Stack.Navigator>
       </NavigationContainer>
     
@@ -23,13 +25,14 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    // backgroundColor: '#fff',
   },
   headerTitle:{
     fontWeight: 'bold',
     fontSize: 20,
-    color: '#706233', // Default color
+    color: '#040D12', 
     textAlign:'center',
+    // fontFamily: 'Quicksand-Light'
   },
   
 });

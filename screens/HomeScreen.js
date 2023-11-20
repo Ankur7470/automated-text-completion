@@ -7,35 +7,39 @@ export default function HomeScreen({navigation}){
         <ImageBackground source={require('../images/landing.png')}
         style={styles.image}>
             <View style={styles.container}>
-                <TouchableOpacity title='explore' onPress={()=>navigation.navigate("About Us")} style={styles.button}>
+                <TouchableOpacity title='explore' onPress={()=>navigation.navigate("TextWiz")} style={styles.button}>
                     <Text style={styles.buttonText}>Explore</Text>
                 </TouchableOpacity>
             </View>
         </ImageBackground>
     );
 }
-
 const styles = StyleSheet.create({
-    image:{
-        flex: 1,
-        resizeMode:'stretch',
-        justifyContent: 'center', // Adjust as needed
-        alignItems: 'center', // Adjust as needed
+    image: {
+      flex: 1,
+      resizeMode: 'stretch',
+      justifyContent: 'center',
+      alignItems: 'center',
     },
     container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-      },
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
     button: {
-        backgroundColor: '#1F1717', // Adjust the color and opacity
-        paddingHorizontal: 20,
-        paddingVertical: 10,
-        borderRadius: 5,
-      },  
-      buttonText: {
-        color: 'white',
-        fontWeight: 'bold',
-        textAlign: 'center',
-      },
-})
+      backgroundColor: '#1F1717',
+      paddingHorizontal: 20,
+      paddingVertical: 15,
+      borderRadius: 15,
+      elevation: 10, // Add elevation for Android shadow effect
+    //   shadowColor: 'black', // Add shadow color for iOS shadow effect
+      shadowOffset: { width: 0, height: 2 },
+      shadowOpacity: 0.25,
+      shadowRadius: 3.84,
+    },
+    buttonText: {
+      color: 'white',
+      fontWeight: 'bold',
+      textAlign: 'center',
+    },
+  });
