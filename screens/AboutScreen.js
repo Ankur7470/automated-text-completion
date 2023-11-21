@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { Ionicons } from '@expo/vector-icons';
 
 
 
@@ -50,6 +51,7 @@ export default function AboutScreen({navigation}) {
         <Text style={styles.content_name}>
         -{">"}Ankur Sinha / Machine Learning & training
         </Text>
+        {/* <Ionicons name="person-circle-outline" size={24} color="black" /> */}
         </ScrollView>
         <TouchableOpacity title="Go to Main Page"  onPress={()=>navigation.navigate("Model")} style={styles.button} >
             <Text style={styles.buttonText} >Try our model </Text>

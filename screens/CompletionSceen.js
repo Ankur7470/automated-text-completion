@@ -4,13 +4,16 @@ import { View, TextInput, Text , TouchableOpacity, StyleSheet } from 'react-nati
 
 export default function TextCompletionScreen({ navigation }) {
   const [inputText, setInputText] = useState('');
+  const [text, setText] = useState('');
 
-  const handleTextSubmit = () => {
-    console.log('Entered text:', inputText);
-  };
+  const handleTextSubmit = (e) => {
+        setText(inputText);
+  }
+  
 
   return (
     <View style={styles.container}>
+        <Text style={styles.genText}>{text}</Text>
       <TextInput
         style={styles.input}
         placeholder="Enter your text here"
@@ -45,9 +48,16 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     borderRadius: 5,
     marginTop: 20, 
-  },buttonText: {
+  },
+  buttonText: {
     color: 'white',
     fontWeight: 'bold',
     textAlign: 'center',
   },
+  genText:{
+    fontSize: 15,
+    fontWeight: '400',
+    textAlign: 'center',
+    color: '#040D12',
+  }
 });
