@@ -41,15 +41,14 @@ export default function AboutScreen({navigation}) {
           {"\u2022"} Natural Language Processing (NLP)
         </Text>
         <Text style={styles.heading2}>Team Members</Text>
-        {/* Placeholder for team member names */}
         <Text style={styles.content_name}>
-          -{">"}Akshat Sharma / UI
+          -{">"}Akshat Sharma 
         </Text>
         <Text style={styles.content_name}>
-        -{">"}Anchit Gedekar / App Design, UI
+        -{">"}Anchit Gedekar 
         </Text>
         <Text style={styles.content_name}>
-        -{">"}Ankur Sinha / Machine Learning & training
+        -{">"}Ankur Sinha 
         </Text>
         {/* <Ionicons name="person-circle-outline" size={24} color="black" /> */}
         </ScrollView>

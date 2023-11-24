@@ -6,8 +6,8 @@ import { Ionicons } from '@expo/vector-icons';
 import HomeScreen from './screens/HomeScreen';
 import AboutScreen from './screens/AboutScreen';
 import CompletionScreen from './screens/CompletionSceen';
-
-
+import LoginScreen from './screens/loginSignUp/Login';
+import SignUpScreen from './screens/loginSignUp/SignUp';
 
 const Stack = createNativeStackNavigator();
 
@@ -25,6 +25,8 @@ export default function App() {
             ),
           }} />
           <Stack.Screen name="Model" options={{headerTitleStyle:styles.headerTitle}} component={CompletionScreen}/>
+          <Stack.Screen name='Login' component={LoginScreen}/>
+          <Stack.Screen name="SignUp" component={SignUpScreen}/>
         </Stack.Navigator>
       </NavigationContainer>
     

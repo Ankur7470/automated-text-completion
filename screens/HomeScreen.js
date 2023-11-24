@@ -7,8 +7,8 @@ export default function HomeScreen({navigation}){
     return( 
             <View style={styles.container}>
                     <Text style={styles.welcome}> Welcome to our app </Text>
-                <TouchableOpacity title='explore' onPress={()=>navigation.navigate("TextWiz")} style={styles.button}>
-                        <Text style={styles.buttonText}>Enter & Explore </Text>
+                <TouchableOpacity title='explore' onPress={()=>navigation.navigate("Login")} style={styles.button}>
+                        <Text style={styles.buttonText}>Enter</Text>
                 </TouchableOpacity>
             <View style={styles.footer}>
                  <Text style={styles.footerText}>© TextWiz. All rights reserved.</Text>
