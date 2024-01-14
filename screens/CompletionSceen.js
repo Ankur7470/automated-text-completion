@@ -1,63 +1,104 @@
-import React  from 'react';
-import {useState} from 'react';
-import { View, TextInput, Text , TouchableOpacity, StyleSheet } from 'react-native';
+import React, { useState, useEffect } from "react";
+import {
+  View,
+  Text,
+  TextInput,
+  StyleSheet,
+  TouchableOpacity,
+  ActivityIndicator,
+  TouchableWithoutFeedback,
+  Keyboard,
+} from "react-native";
+import { styles } from "./styles";
 
-export default function TextCompletionScreen({ navigation }) {
-  const [inputText, setInputText] = useState('');
-  const [text, setText] = useState('');
+const HomeScreen = () => {
+  const [partialText, setPartialText] = useState("");
+  const [completedText, setCompletedText] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleTextSubmit = (e) => {
-        setText(inputText);
-  }
-  
+  const query = async (data) => {
+    const API_TOKEN = "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";
+    console.log("Authorization Header:", `Bearer ${API_TOKEN}`);
+
+    try {
+      const response = await fetch(
+        "https://api-inference.huggingface.co/models/gpt2",
+        {
+          headers: {
+            Authorization: `Bearer ${API_TOKEN}`,
+            "Content-Type": "application/json",
+          },
+          method: "POST",
+          body: JSON.stringify({ inputs: data }),
+        }
+      );
+
+      const result = await response.json();
+      console.log("API Response:", result);
+      return result[0]?.generated_text || "";
+    } catch (error) {
+      console.error("Error:", error.message);
+      throw error;
+    }
+  };
+
+  const generateText = async () => {
+    try {
+      setIsLoading(true);
+      console.log("Generating text...");
+      const generatedText = await query(partialText);
+      console.log("Generated Text:", generatedText);
+      setCompletedText(generatedText);
+    } catch (error) {
+      console.error("Error generating text:", error.message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const clearText = () => {
+    setPartialText("");
+    setCompletedText("");
+  };
 
   return (
-    <View style={styles.container}>
-        <Text style={styles.genText}>{text}</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Enter your text here"
-        value={inputText}
-        onChangeText={(text) => setInputText(text)}
-        multiline
-      />
-      <TouchableOpacity title="Complete Text" style={styles.button} onPress={handleTextSubmit}>
-        <Text style={styles.buttonText}>Complete Text</Text>
-      </TouchableOpacity>
-    </View>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <View style={styles.container}>
+        <Text style={styles.title}>AI Text Generator</Text>
+        <View style={styles.resultContainer}>
+          {completedText !== "" && (
+            <View style={styles.resultBox}>
+              <Text style={styles.resultLabel}>Generated Text:</Text>
+              <Text style={styles.generatedText}>{completedText}</Text>
+            </View>
+          )}
+        </View>
+        <TextInput
+          style={styles.input}
+          placeholder="Type your partial text here..."
+          value={partialText}
+          onChangeText={(text) => setPartialText(text)}
+        />
+        <View style={styles.buttonsContainer}>
+          <TouchableOpacity
+            style={styles.generateButton}
+            onPress={generateText}
+            disabled={isLoading}
+          >
+            <Text style={styles.buttonText}>Generate Text</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.clearButton}
+            onPress={clearText}
+            disabled={isLoading}
+          >
+            <Text style={styles.buttonText}>Clear</Text>
+          </TouchableOpacity>
+        </View>
+        {isLoading && <ActivityIndicator animating={true} color="#3498db" />}
+      </View>
+    </TouchableWithoutFeedback>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 20,
-    justifyContent: 'center',
-    backgroundColor: '#FAF6F0',
-  },
-  input: {
-    borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 5,
-    padding: 10,
-    marginBottom: 20,
-  },
-  button:{
-    backgroundColor: '#1F1717',
-    paddingHorizontal: 20,
-    paddingVertical: 10,
-    borderRadius: 5,
-    marginTop: 20, 
-  },
-  buttonText: {
-    color: 'white',
-    fontWeight: 'bold',
-    textAlign: 'center',
-  },
-  genText:{
-    fontSize: 15,
-    fontWeight: '400',
-    textAlign: 'center',
-    color: '#040D12',
-  }
-});
+export default HomeScreen;

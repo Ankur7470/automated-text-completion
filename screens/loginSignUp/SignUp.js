@@ -40,7 +40,7 @@ const SignUpScreen = () => {
         style={styles.inputField}
         placeholder="Name"
         value={name}
-        onChange={(text)=>setName(text)}
+        onChangeText={(text)=>setName(text)}
         />       
 
       <TextInput
