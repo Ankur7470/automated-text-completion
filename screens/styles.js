@@ -63,6 +63,7 @@ export const styles = StyleSheet.create({
     marginBottom: 20,
   },
   resultBox: {
+    // backgroundColor: "#3498db",
     borderWidth: 2,
     borderColor: "#3498db",
     borderRadius: 12,

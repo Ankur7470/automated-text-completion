@@ -10,6 +10,7 @@ const SignUpScreen = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState(false);
 
 
   const handleSignUp = async (e) => {
@@ -21,7 +22,12 @@ const SignUpScreen = () => {
       if (userCredential.user) {
         navigation.navigate('TextWiz');
       }
+      // else{
+      //   console.log("username already exists")
+      // }
     } catch (error) {
+      // console.log("catch block");
+      setError(true);
       console.log(error);
     }
   };
@@ -56,7 +62,11 @@ const SignUpScreen = () => {
         value={password}
         onChangeText={(text) => setPassword(text)}
       />
-
+      {error && 
+        <View style={{ width:'100%',height:'2%',justifyContent:'center', alignItems:'center' }}>
+          <Text style={{color:'red'}}>Username or Email Already exists</Text>
+        </View>
+      }
       <TouchableOpacity style={styles.button} onPress={handleSignUp}>
         <Text style={styles.buttonText}>Sign Up</Text>
       </TouchableOpacity>

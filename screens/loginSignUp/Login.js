@@ -8,6 +8,7 @@ const LoginScreen = () => {
   const navigation = useNavigation()
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState(false);
 
   const handleLogin = async(e) => {
     e.preventDefault()
@@ -19,6 +20,7 @@ const LoginScreen = () => {
           navigation.navigate('TextWiz');
     }
       } catch (error) {
+        setError(true);
         console.log(error)
       }
     
@@ -48,6 +50,12 @@ const LoginScreen = () => {
         value={password}
         onChangeText={(text) => setPassword(text)}
       />
+
+      {
+        error  &&  <View>
+          <Text>Invalid email or password</Text>
+        </View>
+      }
 
       <TouchableOpacity style={styles.button} onPress={handleLogin}>
         <Text style={styles.buttonText}>Login</Text>

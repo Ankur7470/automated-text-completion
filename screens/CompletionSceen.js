@@ -22,14 +22,15 @@ const HomeScreen = () => {
 
     try {
       const response = await fetch(
-        "https://api-inference.huggingface.co/models/gpt2",
+        // "https://api-inference.huggingface.co/models/gpt2",
+        "https://api-inference.huggingface.co/models/openai-community/gpt2-medium",
         {
           headers: {
             Authorization: `Bearer ${API_TOKEN}`,
             "Content-Type": "application/json",
           },
           method: "POST",
-          body: JSON.stringify({ inputs: data }),
+          body: JSON.stringify({ inputs: data, parameters:{max_new_tokens: 50, temperature: 0.7,} }),
         }
       );
 
